@@ -8,18 +8,16 @@
 </head>
 <body class="bg-gray-100">
 
-    <!-- Login Page -->
     <div class="min-h-screen flex flex-col items-center justify-center p-4">
         <h1 class="text-indigo-500 font-bold text-3xl mb-5">ITTHINK</h1>
         <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
             <form action="#" method="POST" class="flex flex-col">
                 <div class="mb-4">
-                    <input 
-                        placeholder="Email address"
+                    <input placeholder="Email address"
                         type="email" 
                         id="email" 
                         name="email" 
-                        required 
+                      
                         class="mt-1 p-4 h-10 block w-full border-gray-300 rounded-md shadow-sm border">
                 </div>
                 <div class="mb-6">
@@ -28,15 +26,18 @@
                         type="password" 
                         id="password" 
                         name="password" 
-                        required 
+                      
                         class="mt-1 p-4 h-10 block w-full border-gray-300 rounded-md shadow-sm border">
                 </div>
                 <button type="submit" class="w-full bg-indigo-500 text-white font-bold py-2 px-4 rounded-md duration-100 hover:bg-indigo-600">Log in</button>
                 <hr class="my-5">
-                <button type="submit" class="min-w-20 bg-[#42b72a] text-white font-bold  py-2 px-2 rounded-md mx-auto duration-100 hover:bg-[#359922]">Create new account</button>
+                <a class="mx-auto" href="signup.html"><button type="submit" class="min-w-20 bg-[#42b72a] text-white font-bold  py-2 px-2 rounded-md duration-100 hover:bg-[#359922]">Create new account</button> </a>   
             </form>
         </div>
     </div>
 
+    <footer class="w-full h-24 bg-white flex justify-center items-center mt-10">
+        <p class="text-black text-center">Designed by <span class="font-semibold">MOHAMMED LATRACH</span> <br> <span class="text-[0.9rem]">&copy; YouCode Nador Promo 2024-2026</span></p>
+    </footer>
 </body>
 </html>
