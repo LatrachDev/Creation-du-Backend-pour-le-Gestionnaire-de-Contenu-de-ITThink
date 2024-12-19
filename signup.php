@@ -1,6 +1,8 @@
-
-
 <?php
+
+    require 'db_connection.php';
+    
+
     $name = $email = $password = $confirm_password = "";
     $error_name = $error_email = $error_password = $error_confirm_password = "";
 
@@ -40,30 +42,6 @@
         if (empty($error_name) && empty($error_email) && empty($error_password) && empty($error_confirm_password)) {
             $hashed_password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-        // **************************
-            $db_server = "localhost";
-            $db_user = "root";
-            $db_pass = "";
-            $db_name = "itthink_dashboard";
-            
-            $conn = mysqli_connect
-            (
-                hostname: $db_server, 
-                username: $db_user, 
-                password: $db_pass, 
-                database: $db_name
-            );
-
-            if($conn)
-            {
-                echo"You're connected!";
-            }
-            else
-            {
-                echo "couldn't connect";
-            }
-        // ***************************
-
             $sql = "INSERT INTO user (fullname, email, password) VALUES(?,?,?)";
             $stmt = $conn->prepare($sql);
 
@@ -72,7 +50,7 @@
 
                 if ($stmt->execute()){
                     echo "Registration successful!";
-                    header("Location: index.html");
+                    header("Location: index.php");
                     exit();
                 } else {
                     echo "Error: " . $stmt->error;
@@ -158,7 +136,7 @@
                 <hr class="my-5 border w-full">
 
                 <button type="submit" class="min-w-44 bg-[#42b72a] text-white font-bold  py-2 px-2 rounded-md mx-auto duration-100 hover:bg-[#359922]"> SIgn Up</button>
-                <p class="mt-4 text-blue-700 hover:text-blue-900"><a href="index.html">Already have an account?</a></p>
+                <p class="mt-4 text-blue-700 hover:text-blue-900"><a href="index.php">Already have an account?</a></p>
             </form>
 
         </div>
