@@ -20,13 +20,11 @@
         } else {
             $email = validateInput($_POST["email"]);
         }
-        
-        
 
         if (empty($_POST["password"])) {
             $error_password = "Please enter your password!";
-        } elseif (strlen($_POST["password"]) < 8) {
-            $error_password = "Password must be at least 8 characters.";
+        } elseif (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $_POST["password"])) {
+            $error_password = "Password must include uppercase, lowercase, a number, and a special character.";
         } else {
             $password = validateInput($_POST["password"]);
         }
@@ -40,19 +38,58 @@
         }
 
         if (empty($error_name) && empty($error_email) && empty($error_password) && empty($error_confirm_password)) {
-            header("Location: index.html");
-            exit();
+            $hashed_password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
+        // **************************
+            $db_server = "localhost";
+            $db_user = "root";
+            $db_pass = "";
+            $db_name = "itthink_dashboard";
+            
+            $conn = mysqli_connect
+            (
+                hostname: $db_server, 
+                username: $db_user, 
+                password: $db_pass, 
+                database: $db_name
+            );
+
+            if($conn)
+            {
+                echo"You're connected!";
+            }
+            else
+            {
+                echo "couldn't connect";
+            }
+        // ***************************
+
+            $sql = "INSERT INTO user (fullname, email, password) VALUES(?,?,?)";
+            $stmt = $conn->prepare($sql);
+
+            if($stmt){
+                $stmt->bind_param("sss", $name, $email, $hashed_password);
+
+                if ($stmt->execute()){
+                    echo "Registration successful!";
+                    header("Location: index.html");
+                    exit();
+                } else {
+                    echo "Error: " . $stmt->error;
+                }
+                $stmt->close();
+            } else {
+                echo "Error preparing the statement: " . $conn->error;
+            }
+            $conn->close();
         }
     }
     function validateInput($data) {
-        // $data = trim($data);
-        // $data = stripslashes($data);
-        // $data = htmlspecialchars($data);
-        // return $data;
+        
         return htmlspecialchars(stripslashes(trim($data)));
     }
 
-// ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
