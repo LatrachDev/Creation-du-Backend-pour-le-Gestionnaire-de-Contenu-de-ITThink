@@ -45,7 +45,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#users" onclick="showSection('users')" class="nav-link block text-white hover:bg-indigo-500 rounded p-2">
+                        <a href="#category" onclick="showSection('category')" class="nav-link block text-white hover:bg-indigo-500 rounded p-2">
                             Category management
                         </a>
                         </a>
@@ -108,41 +108,41 @@
                 </section>
 
                 <!-- Category Management -->
-                <section id="users" class="dashboard-section">
-                    <div class="bg-white rounded-lg shadow">
-                        <div class="p-4 border-b border-gray-200 flex justify-between items-center">
-                            <h2 class="text-xl font-semibold text-gray-900">Users Management</h2>
-                            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add New User</button>
+                <section id="category" class="mb-8 dashboard-section">
+                    <?php 
+                        $sql_cat = "SELECT * FROM categories";
+                        $cat_result = $conn -> query($sql_cat);
+                    
+                        if ($cat_result->num_rows > 0) {
+                            $rows = $cat_result->fetch_all(MYSQLI_ASSOC);?>
+                                                
+                        <h2 class="text-2xl font-bold mb-4 text-indigo-600">Category Management</h2>
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <div class="mb-4 inline-block">
+                                <a href="addCategorie.php" id="add_cat" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Nouvelle Catégorie</a>
+                            </div>
+                            <div class="mb-4 inline-block">
+                                <a href="addSubCat.php" id="add_sub_cat" class="cursor-pointer bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Nouvelle Sous Catégorie</a>
+                            </div>
+                            <div class="grid grid-cols-4 gap-4">
+                                <?php foreach($rows as $row){?>
+                                <div class="border p-4 rounded-lg">
+                                        <h3 class="font-bold"><?=$row["nom_categorie"]?></h3>
+                                        <div class="mt-4 space-x-2">
+                                            <a href="update_cat.php?id=<?=$row['id_categorie']?>" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Modifier</a>
+                                            <a href="delete_cat.php?id=<?=$row['id_categorie']?>" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Supprimer</a>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </div>
                         </div>
-                        <div class="p-4">
-                            <table class="min-w-full">
-                                <thead>
-                                    <tr class="bg-gray-50">
-                                        <th class="text-left p-4">User</th>
-                                        <th class="text-left p-4">Role</th>
-                                        <th class="text-left p-4">Status</th>
-                                        <th class="text-left p-4">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="border-b">
-                                        <td class="p-4">John Doe</td>
-                                        <td class="p-4">Admin</td>
-                                        <td class="p-4"><span class="px-2 py-1 bg-green-100 text-green-800 rounded">Active</span></td>
-                                        <td class="p-4">
-                                            <button class="text-blue-500 hover:text-blue-700 mr-2">Edit</button>
-                                            <button class="text-red-500 hover:text-red-700">Delete</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                        <?php }else echo "no data";
+                    ?> 
                 </section>
 
                 <!-- Projects Section -->
-                <section id="projects" class="mb-8">
-                    <h2 class="text-2xl font-bold mb-4">Projects management</h2>
+                <section id="projects" class="mb-8 dashboard-section active">
+                    <h2 class="text-2xl font-bold mb-4 text-indigo-600">Projects management</h2>
                     <div class="bg-white rounded-lg shadow p-6">
                         <table class="w-full">
                             <thead>
@@ -176,24 +176,10 @@
                     </div>
                 </section>
 
-                <!-- Settings Section -->
+                <!-- Testimonial management -->
                 <section id="settings" class="dashboard-section">
                     <div class="bg-white rounded-lg shadow p-6">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4">Settings</h2>
-                        <form>
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Site Name</label>
-                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Email Notifications</label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
-                                    <span class="ml-2 text-gray-700">Enable email notifications</span>
-                                </label>
-                            </div>
-                            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Save Settings</button>
-                        </form>
+                        <h2 class="text-xl font-semibold text-gray-900 mb-4">Testimonial management</h2>
                     </div>
                 </section>
             </main>
