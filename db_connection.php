@@ -12,12 +12,12 @@
         database: $db_name
     );
 
-    if($conn)
-    {
-        echo"You're connected!";
-    }
-    else
-    {
-        echo "couldn't connect";
-    }
+    // if($conn)
+    // {
+    //     echo"You're connected!";
+    // }
+    // else
+    // {
+    //     echo "couldn't connect";
+    // }
 ?>

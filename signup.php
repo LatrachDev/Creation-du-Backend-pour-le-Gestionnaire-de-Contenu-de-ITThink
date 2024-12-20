@@ -42,7 +42,7 @@
         if (empty($error_name) && empty($error_email) && empty($error_password) && empty($error_confirm_password)) {
             $hashed_password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-            $sql = "INSERT INTO user (fullname, email, password) VALUES(?,?,?)";
+            $sql = "INSERT INTO users (fullname, email, password) VALUES(?,?,?)";
             $stmt = $conn->prepare($sql);
 
             if($stmt){

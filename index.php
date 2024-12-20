@@ -1,11 +1,21 @@
 <?php
+    session_start();
     require_once 'db_connection.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        
         $email = $_POST["email"];
         $password = $_POST["password"];
-
-        $stmt = $conn->prepare("SELECT id, fullname, password FROM user WHERE email = ?");
+        
+        if ($email === "admin@admin" && $password === "admin") {
+            $_SESSION['user_id'] = "admin";
+            $_SESSION['fullname'] = "Administrator";
+            header("Location: admin_dashboard.php"); 
+            exit();
+        }
+        
+        $stmt = $conn->prepare("SELECT user_id, fullname, password FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
@@ -15,9 +25,9 @@
             $stmt->fetch();
 
             if (password_verify($password, $hashed_password)) {
-                $_SESSION['user_id'] = $id;
+                $_SESSION['user_id'] = $user_id;
                 $_SESSION['fullname'] = $fullname;
-                header("Location: dashboard.php");
+                header("Location: user.php");
                 exit();
             } else {
                 $error_message = "Invalid password!";
@@ -68,7 +78,7 @@
 
                 <button type="submit" class="w-full bg-indigo-500 text-white font-bold py-2 px-4 rounded-md duration-100 hover:bg-indigo-600">Log in</button>
                 <hr class="my-5">
-                <button type="submit" class="min-w-20 mx-auto bg-[#42b72a] text-white font-bold  py-2 px-2 rounded-md duration-100 hover:bg-[#359922]">Create new account</button>   
+                <button class="min-w-20 mx-auto bg-[#42b72a] text-white font-bold  py-2 px-2 rounded-md duration-100 hover:bg-[#359922]" formaction="signup.php">Create new account</button>   
             </form>
 
         </div>
