@@ -119,18 +119,18 @@
                         <h2 class="text-2xl font-bold mb-4 text-indigo-600">Category Management</h2>
                         <div class="bg-white rounded-lg shadow p-6">
                             <div class="mb-4 inline-block">
-                                <a href="addCategorie.php" id="add_cat" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Nouvelle Catégorie</a>
+                                <a href="addCategorie.php" id="add_cat" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Add new category</a>
                             </div>
                             <div class="mb-4 inline-block">
-                                <a href="addSubCat.php" id="add_sub_cat" class="cursor-pointer bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Nouvelle Sous Catégorie</a>
+                                <a href="addSubCat.php" id="add_sub_cat" class="cursor-pointer bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Add new subcategory</a>
                             </div>
                             <div class="grid grid-cols-4 gap-4">
                                 <?php foreach($rows as $row){?>
                                 <div class="border p-4 rounded-lg">
                                         <h3 class="font-bold"><?=$row["nom_categorie"]?></h3>
                                         <div class="mt-4 space-x-2">
-                                            <a href="update_cat.php?id=<?=$row['id_categorie']?>" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Modifier</a>
-                                            <a href="delete_cat.php?id=<?=$row['id_categorie']?>" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Supprimer</a>
+                                            <a href="update_cat.php?id=<?=$row['id_categorie']?>" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Edit</a>
+                                            <a href="delete_cat.php?id=<?=$row['id_categorie']?>" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</a>
                                         </div>
                                     </div>
                                 <?php } ?>
