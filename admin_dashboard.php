@@ -46,12 +46,13 @@
                     </li>
                     <li>
                         <a href="#users" onclick="showSection('users')" class="nav-link block text-white hover:bg-indigo-500 rounded p-2">
-                            Project management
+                            Category management
+                        </a>
                         </a>
                     </li>
                     <li>
                         <a href="#projects" onclick="showSection('projects')" class="nav-link block text-white hover:bg-indigo-500 rounded p-2">
-                            Category management
+                            Project management
                         </a>
                     </li>
                     <li>
@@ -106,7 +107,7 @@
                     </div>
                 </section>
 
-                <!-- Users Management -->
+                <!-- Category Management -->
                 <section id="users" class="dashboard-section">
                     <div class="bg-white rounded-lg shadow">
                         <div class="p-4 border-b border-gray-200 flex justify-between items-center">
@@ -140,24 +141,38 @@
                 </section>
 
                 <!-- Projects Section -->
-                <section id="projects" class="dashboard-section">
-                    <div class="bg-white rounded-lg shadow">
-                        <div class="p-4 border-b border-gray-200 flex justify-between items-center">
-                            <h2 class="text-xl font-semibold text-gray-900">Projects</h2>
-                            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Create Project</button>
-                        </div>
-                        <div class="p-4">
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                <div class="border rounded p-4">
-                                    <h3 class="font-semibold">Website Redesign</h3>
-                                    <p class="text-gray-600 text-sm mt-1">Due: Dec 24, 2024</p>
-                                    <div class="mt-2">
-                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-sm">In Progress</span>
-                                    </div>
-                                </div>
-                                <!-- Add more project cards as needed -->
-                            </div>
-                        </div>
+                <section id="projects" class="mb-8">
+                    <h2 class="text-2xl font-bold mb-4">Projects management</h2>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Titre</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <?php 
+                                    $sql = "SELECT * FROM projects";
+                                    $resultat = $conn->query($sql);
+                                    while ($row = mysqli_fetch_array($resultat)) {
+                                        ?>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap"><?php echo $row["id_projet"]?></td>
+                                            <td class="px-6 py-4 whitespace-nowrap"><?php echo $row["titre_projet"]?></td>
+                                            <td class="px-6 py-4 whitespace-nowrap"><?php echo $row["status"]?></td>
+                                            <td class="px-6 py-4"><?php echo $row["projet_description"]?></td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <a href="edit_project.php?id=<?=$row["id_projet"]?>" class="edit-btn bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 cursor-pointer">Modifier</a>
+                                                <a href="remove_project.php?id=<?=$row["id_projet"]?>" class="edit-btn bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 cursor-pointer">Remove</a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                            </tbody>
+                        </table>
                     </div>
                 </section>
 
