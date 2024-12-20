@@ -43,7 +43,7 @@
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto p-6">
-        <h1 class="text-2xl font-bold mb-4">Edit Project</h1>
+        <h1 class="text-2xl font-bold mb-4 text-indigo-600">Edit Project</h1>
         <form method="POST" class="bg-white rounded-lg shadow p-6">
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Title</label>

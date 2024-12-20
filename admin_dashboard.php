@@ -71,7 +71,7 @@
             <header class="bg-white shadow-lg">
                 <div class="p-4 flex justify-between items-center">
                     <div>
-                        <h1 class="text-2xl font-bold text-gray-900">Welcome back!</h1>
+                        <h1 class="text-2xl font-bold text-indigo-600">Welcome back!</h1>
                         <p class="text-gray-600">Mohammed Latrach</p>
                     </div>
                     <div class="flex items-center space-x-4">
